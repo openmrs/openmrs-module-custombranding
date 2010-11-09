@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.2//EN" "http://resources.openmrs.org/doctype/config-1.2.dtd">
+
+<module configVersion="1.2">
+    <!-- Base Module Properties -->
+    <id>custombranding</id>
+    <name>Custom Branding</name>
+    <version>0.1</version>
+    <package>org.openmrs.module.@MODULE_ID@</package>
+    <author>Saptarshi P</author>
+    <description>
+            Changes the application logos and branding
+    </description>
+    <activator>@MODULE_PACKAGE@.CustomBrandingActivator</activator>
+    <!-- <updateURL>https://dev.openmrs.org/modules/download/@MODULE_ID@/update.rdf</updateURL> -->
+    <!-- /Base Module Properties -->
+	
+    <require_version>1.5.0.7125</require_version>
+	
+    <!-- Extensions -->
+    <extension>
+        <point>org.openmrs.admin.list</point>
+        <class>@MODULE_PACKAGE@.extension.html.CustomBrandingExt</class>
+    </extension>
+		
+    <!-- Internationalization -->
+    <!-- All message codes should start with @MODULE_ID@.* -->
+    <messages>
+        <lang>en</lang>
+        <file>messages.properties</file>
+    </messages>
+    <messages>
+        <lang>fr</lang>
+        <file>messages_fr.properties</file>
+    </messages>
+    <messages>
+        <lang>es</lang>
+        <file>messages_es.properties</file>
+    </messages>
+    <!-- /Internationalization -->
+</module>
+
