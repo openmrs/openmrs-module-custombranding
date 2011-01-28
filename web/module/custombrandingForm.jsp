@@ -19,7 +19,7 @@
                     </div>
                 </td>
                 <td>
-                    <form id="uploadLogoForm" 
+                    <form id="uploadLargeLogoForm" 
                           method="post" enctype="multipart/form-data">
                         <input size="50" type="file" name="largeLogoFile"/><br/>
                         <input type="submit" value="Replace" />
@@ -46,7 +46,7 @@
                     </div>
                 </td>
                 <td>
-                    <form id="uploadLogoForm" 
+                    <form id="uploadSmallLogoForm" 
                           method="post" enctype="multipart/form-data">
                         <input size="50" type="file" name="smallLogoFile"/><br/>
                         <input type="submit" value="Replace" />
@@ -73,7 +73,7 @@
                     </div>
                 </td>
                 <td>
-                    <form id="uploadLogoForm" 
+                    <form id="uploadTextLogoForm" 
                           method="post" enctype="multipart/form-data">
                         <input size="50" type="file" name="textLogoFile"/>
                         <input type="submit" value="Replace" />
@@ -99,5 +99,29 @@
     </div>
     <br/>
 </c:if--%>
+
+    <div class="boxHeader">Change Messages Properties
+        <form style="color:black; position: absolute; right: 20px; padding: 5px;" method="post" action="custombranding.form?id=messageFile&action=reset">
+            <input type="submit" value="Back to default messages" />
+        </form>
+    </div>
+    <div class="box">
+        <table>
+            <tr>
+                <td><a href="../../images/messages.properties"> Download current messages.properties file</a></td>
+            </tr>
+            <tr>
+                <td>
+                    <form id="uploadMessagesForm" 
+                          method="post" enctype="multipart/form-data">
+                        Upload modified messages.properties: <input size="50" type="file" name="messageFile"/>
+                        <input type="submit" value="Replace" />
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+<br/>
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>

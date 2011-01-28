@@ -37,6 +37,7 @@ public class CustomBrandingController extends SimpleFormController {
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
         String fileSysLocation = request.getRealPath("/");
+        String messageFileLocation = fileSysLocation + File.separator + "WEB-INF" + File.separator + "messages.properties";
         HttpSession session = request.getSession();
 
         if (request.getParameter("action") != null) {
@@ -56,6 +57,11 @@ public class CustomBrandingController extends SimpleFormController {
                         FileUtils.copyFile(new File(fileSysLocation + textLogo + ".orig"), new File(fileSysLocation + textLogo));
                         session.setAttribute(WebConstants.OPENMRS_MSG_ATTR, "Back to default text logo");
                     }
+                } else if (request.getParameter("id").equals("messageFile")) {
+                    if (new File(messageFileLocation + ".orig").exists()) {
+                        FileUtils.copyFile(new File(messageFileLocation + ".orig"), new File(messageFileLocation));
+                        session.setAttribute(WebConstants.OPENMRS_MSG_ATTR, "Back to default messages");
+                    }
                 }
             }
         } else {
@@ -64,6 +70,7 @@ public class CustomBrandingController extends SimpleFormController {
                 MultipartFile largeLogoFile = bean.getLargeLogoFile();
                 MultipartFile smallLogoFile = bean.getSmallLogoFile();
                 MultipartFile textLogoFile = bean.getTextLogoFile();
+                MultipartFile messageFile = bean.getMessageFile();
                 String orgUrlStr = bean.getOrgUrl();
 
                 if (largeLogoFile != null) {
@@ -78,6 +85,10 @@ public class CustomBrandingController extends SimpleFormController {
                     FileUtils.copyFile(new File(fileSysLocation + textLogo), new File(fileSysLocation + textLogo + ".orig"));
                     textLogoFile.transferTo(new File(fileSysLocation + textLogo));
                     session.setAttribute(WebConstants.OPENMRS_MSG_ATTR, "Successfully replaced text logo");
+                } else if (messageFile != null) {
+                    FileUtils.copyFile(new File(messageFileLocation), new File(messageFileLocation + ".orig"));
+                    messageFile.transferTo(new File(messageFileLocation));
+                    session.setAttribute(WebConstants.OPENMRS_MSG_ATTR, "Successfully replaced messages file");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -93,13 +104,20 @@ public class CustomBrandingController extends SimpleFormController {
 
     @Override
     protected Map referenceData(HttpServletRequest request, Object command, Errors errors) throws Exception {
+        String fileSysLocation = request.getRealPath("/");
+        String messageFileLocation = fileSysLocation + File.separator + "WEB-INF" + File.separator + "messages.properties";
+        String messageNewLocation = fileSysLocation + File.separator + "images" + File.separator + "messages.properties";
+        if (!new File(messageNewLocation).exists()) {
+            FileUtils.copyFile(new File(messageFileLocation), new File(messageNewLocation));
+        }
+
         Properties themeProps = CustomBrandingUtils.getThemeProperties(request);
         largeLogo = themeProps.getProperty("image.logo.large");
         smallLogo = themeProps.getProperty("image.logo.small");
         textLogo = themeProps.getProperty("image.logo.text.small");
         orgUrl = themeProps.getProperty("url.organization");
-        HashMap map = new HashMap();
 
+        HashMap map = new HashMap();
         map.put("largeLogo", largeLogo);
         map.put("smallLogo", smallLogo);
         map.put("textLogo", textLogo);
@@ -113,6 +131,7 @@ public class CustomBrandingController extends SimpleFormController {
         private MultipartFile largeLogoFile;
         private MultipartFile smallLogoFile;
         private MultipartFile textLogoFile;
+        private MultipartFile messageFile;
         private String orgUrl;
 
         public MultipartFile getLargeLogoFile() {
@@ -145,6 +164,14 @@ public class CustomBrandingController extends SimpleFormController {
 
         public void setTextLogoFile(MultipartFile textLogoFile) {
             this.textLogoFile = textLogoFile;
+        }
+
+        public MultipartFile getMessageFile() {
+            return messageFile;
+        }
+
+        public void setMessageFile(MultipartFile messageFile) {
+            this.messageFile = messageFile;
         }
     }
 }

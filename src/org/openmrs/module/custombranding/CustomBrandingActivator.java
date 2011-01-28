@@ -13,13 +13,9 @@
  */
 package org.openmrs.module.custombranding;
 
-import java.io.File;
-import java.io.IOException;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.Activator;
-import org.openmrs.util.OpenmrsUtil;
 
 /**
  * This class contains the logic that is run every time this module is either started or shutdown
