@@ -107,9 +107,7 @@ public class CustomBrandingController extends SimpleFormController {
         String fileSysLocation = request.getRealPath("/");
         String messageFileLocation = fileSysLocation + File.separator + "WEB-INF" + File.separator + "messages.properties";
         String messageNewLocation = fileSysLocation + File.separator + "images" + File.separator + "messages.properties";
-        if (!new File(messageNewLocation).exists()) {
-            FileUtils.copyFile(new File(messageFileLocation), new File(messageNewLocation));
-        }
+        FileUtils.copyFile(new File(messageFileLocation), new File(messageNewLocation));
 
         Properties themeProps = CustomBrandingUtils.getThemeProperties(request);
         largeLogo = themeProps.getProperty("image.logo.large");

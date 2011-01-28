@@ -5,7 +5,7 @@
     <!-- Base Module Properties -->
     <id>custombranding</id>
     <name>Custom Branding</name>
-    <version>0.1</version>
+    <version>0.2</version>
     <package>org.openmrs.module.@MODULE_ID@</package>
     <author>Saptarshi P</author>
     <description>
