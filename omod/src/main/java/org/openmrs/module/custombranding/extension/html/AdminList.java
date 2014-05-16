@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.openmrs.module.Extension;
 import org.openmrs.module.web.extension.AdministrationSectionExt;
+import org.openmrs.util.OpenmrsClassLoader;
 
 /**
  * This class defines the links that will appear on the administration page under the
@@ -26,6 +27,8 @@ import org.openmrs.module.web.extension.AdministrationSectionExt;
  */
 public class AdminList extends AdministrationSectionExt {
 	
+	private static String requiredPrivileges = "View Custom Branding";
+
 	/**
 	 * @see AdministrationSectionExt#getMediaType()
 	 */
@@ -42,6 +45,19 @@ public class AdminList extends AdministrationSectionExt {
 		return "custombranding.title";
 	}
 	
+	/**
+	 * @see AdministrationSectionExt#getRequiredPrivilege()
+	 */
+	@Override
+	public String getRequiredPrivilege() {
+		if (requiredPrivileges == null) {
+			StringBuilder builder = new StringBuilder();
+			requiredPrivileges = builder.toString();
+		}
+		
+		return requiredPrivileges;
+	}
+
 	/**
 	 * @see AdministrationSectionExt#getLinks()
 	 */
