@@ -1,1 +1,15 @@
 target/
+api/.settings
+api/.project
+api/target
+api/bin
+omod/.settings
+omod/.project
+omod/target
+omod/bin
+.settings
+.classpath
+.project
+nbactions.xml
+*~
+*.bak
