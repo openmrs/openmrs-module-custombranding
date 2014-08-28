@@ -1,6 +1,8 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
 <%@ include file="/WEB-INF/template/header.jsp"%>
 
+<openmrs:require privilege="View Custom Branding" otherwise="/login.htm" />
+
 <h2><spring:message code="custombranding.title"/></h2>
 <br/>
 
