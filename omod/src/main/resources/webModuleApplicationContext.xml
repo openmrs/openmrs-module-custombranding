@@ -50,5 +50,7 @@
             <value>/module/${project.parent.artifactId}/custombrandingForm</value>
         </property>
     </bean>
+
+
 		
 </beans>

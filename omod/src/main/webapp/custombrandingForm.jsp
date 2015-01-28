@@ -1,10 +1,12 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
 <%@ include file="/WEB-INF/template/header.jsp"%>
 
+<openmrs:require privilege="View Custom Branding" otherwise="/login.htm" />
+
 <h2><spring:message code="custombranding.title"/></h2>
 <br/>
 
-<c:if test="${not empty largeLogo}">
+<c:if test="${not empty smallLogo}">
     <div class="boxHeader">Large Logo 
         <form style="color:black; position: absolute; right: 20px; padding: 5px;" method="post" action="custombranding.form?id=largeLogo&action=reset">
             <input type="submit" value="Back to theme default" />
@@ -100,7 +102,7 @@
                     </div>
                 </td>
                 <td>
-                    <form id="uploadFaviconForm" 
+                    <form id="uploadFaviconForm"
                           method="post" enctype="multipart/form-data">
                         <input size="50" type="file" name="faviconFile"/>
                         <input type="submit" value="Replace" />
